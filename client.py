@@ -318,7 +318,10 @@ class Ndex2(object):
 
     def save_new_network(self, cx, visibility=None):
         """
-        .. code-block:: python
+
+        Create a new network (cx) on the server
+       
+	 .. code-block:: python
 
             query_result_cx=my_ndex.get_neighborhood('c9243cce-2d32-11e8-b939-0ac135e8bacf','XRN1')
 
@@ -334,12 +337,8 @@ class Ndex2(object):
             else:
                 print("failed")
                 print (new_summary)
-
-
-
-        Create a new network (cx) on the server
-
-        :param cx: Network cx
+        
+	:param cx: Network cx
         :type cx: list of dicts
         :param visibility: Sets the visibility (PUBLIC or PRIVATE)
         :type visibility: string
@@ -434,15 +433,14 @@ class Ndex2(object):
     def get_network_as_cx_stream(self, network_id):
         """
 
-        .. code-block:: python
+        Get the existing network with UUID network_id from the NDEx connection as a CX stream.
+
+	.. code-block:: python
 
             import json
 
             response = my_ndex.get_network_as_cx_stream('c9243cce-2d32-11e8-b939-0ac135e8bacf')
             raw_cx = cx_stream.json()
-
-
-        Get the existing network with UUID network_id from the NDEx connection as a CX stream.
 
         :param network_id: The UUID of the network.
         :type network_id: str
@@ -480,16 +478,15 @@ class Ndex2(object):
     def get_neighborhood_as_cx_stream(self, network_id, search_string, search_depth=1, edge_limit=2500, error_when_limit=True):
         """
 
+        Get a CX stream for a subnetwork of the network specified by UUID network_id and a traversal of search_depth
+        steps around the nodes found by search_string.
+
         .. code-block:: python
 
             import json
 
             query_result_cx_stream = my_ndex.get_neighborhood_as_cx_stream('c9243cce-2d32-11e8-b939-0ac135e8bacf','XRN1')
             raw_cx = query_result_cx_stream.json()
-
-
-        Get a CX stream for a subnetwork of the network specified by UUID network_id and a traversal of search_depth
-        steps around the nodes found by search_string.
 
         :param network_id: The UUID of the network.
         :type network_id: str
@@ -519,7 +516,10 @@ class Ndex2(object):
 
     def get_neighborhood(self, network_id, search_string, search_depth=1, edge_limit=2500):
         """
-        
+
+        Get the CX for a subnetwork of the network specified by UUID network_id and a traversal of search_depth steps
+        around the nodes found by search_string.
+
         .. code-block:: python
 
             query_result_cx=my_ndex.get_neighborhood('c9243cce-2d32-11e8-b939-0ac135e8bacf','XRN1')
@@ -532,9 +532,6 @@ class Ndex2(object):
 
             print("Query result network contains %s nodes and %s edges." % (number_of_nodes, number_of_edges))
 
-
-        Get the CX for a subnetwork of the network specified by UUID network_id and a traversal of search_depth steps
-        around the nodes found by search_string.
 
         :param network_id: The UUID of the network.
         :type network_id: str
@@ -632,6 +629,10 @@ class Ndex2(object):
 
     def search_networks(self, search_string="", account_name=None, start=0, size=100, include_groups=False):
         """
+
+        Search for networks based on the search_text, optionally limited to networks owned by the specified
+        account_name.
+
         .. code-block:: python
 
             list_tutorial_networks=my_ndex.search_networks('tutorial')
@@ -640,9 +641,6 @@ class Ndex2(object):
             for i in list_tutorial_networks.get('networks'):
                 print( "%s -->> %s" % (i.get('name'), i.get('externalId')))
 
-
-        Search for networks based on the search_text, optionally limited to networks owned by the specified
-        account_name.
 
         :param search_string: The text to search for.
         :type search_string: str
@@ -697,6 +695,8 @@ class Ndex2(object):
     def get_network_summary(self, network_id):
         """
 
+        Gets information about a network.
+
         .. code-block:: python
 
             ns=my_ndex.get_network_summary('c9243cce-2d32-11e8-b939-0ac135e8bacf')
@@ -724,8 +724,6 @@ class Ndex2(object):
 
             HTML(summary2table(ns))
 
-        Gets information about a network.
-
         :param network_id: The UUID of the network.
         :type network_id: str
         :return: Summary
@@ -741,12 +739,12 @@ class Ndex2(object):
 
     def make_network_public(self, network_id):
         """
+
+        Makes the network specified by the network_id public.
+
         .. code-block:: python
 
             my_ndex.make_network_public("ENTER YOUR NETWORK ID")
-
-
-        Makes the network specified by the network_id public.
 
         :param network_id: The UUID of the network.
         :type network_id: str
@@ -785,11 +783,12 @@ class Ndex2(object):
     def make_network_private(self, network_id):
         """
 
+        Makes the network specified by the network_id private.
+
         .. code-block:: python
 
             my_ndex.make_network_private("ENTER YOUR NETWORK ID")
 
-        Makes the network specified by the network_id private.
 
         :param network_id: The UUID of the network.
         :type network_id: str
@@ -818,7 +817,10 @@ class Ndex2(object):
         return self.get(route)
 
     def delete_network(self, network_id, retry=5):
-        """
+        """            
+
+        Deletes the specified network from the server
+
         .. code-block:: python
             
             query_result_cx=my_ndex.get_neighborhood('c9243cce-2d32-11e8-b939-0ac135e8bacf','XRN1')
@@ -835,9 +837,6 @@ class Ndex2(object):
                 else:
                     print("URI of the newly created network %s is %s" % (uuid_subset, uri_subset))
                 indexval += 1
-            
-
-        Deletes the specified network from the server
 
         :param network_id: Network id
         :type network_id: string
@@ -865,12 +864,12 @@ class Ndex2(object):
 
     def get_provenance(self, network_id):
         """
-        
+
+        Gets the network provenance
+
         .. code-block:: python
          
             my_ndex.get_provenance('c9243cce-2d32-11e8-b939-0ac135e8bacf') 
-
-        Gets the network provenance
 
         .. warning::
 
@@ -915,14 +914,13 @@ class Ndex2(object):
     def set_read_only(self, network_id, value):
         """
 
+        Sets the read only flag on the specified network
+
         .. code-block:: python
 
             my_ndex.set_read_only("ENTER YOUR NETWORK ID", False)
             new_summary = my_ndex.get_network_summary("ENTER YOUR NETWORK ID")
             print("The read only status has been reverted to %s" % new_summary.get('isReadOnly'))
-
-
-        Sets the read only flag on the specified network
 
         :param network_id: Network id
         :type network_id: string
@@ -1008,15 +1006,16 @@ class Ndex2(object):
     def update_network_profile(self, network_id, network_profile):
         """
 
+        Updates the network profile
+        Any profile attributes specified will be updated but attributes that are not specified will
+        have no effect - omission of an attribute does not mean deletion of that attribute.
+        The network profile attributes that can be updated by this method are: 'name', 'description' and 'version'.
+
         .. code-block:: python
 
             network_profile={"name":"My Network", "description":"learn from Tutorial", "version":"1.0"}
             my_ndex.update_network_profile("ENTER YOUR NETWORK ID", network_profile)    
 
-        Updates the network profile
-        Any profile attributes specified will be updated but attributes that are not specified will
-        have no effect - omission of an attribute does not mean deletion of that attribute.
-        The network profile attributes that can be updated by this method are: 'name', 'description' and 'version'.
 
         :param network_id: Network id
         :type network_id: string
@@ -1100,11 +1099,13 @@ class Ndex2(object):
 
     def get_user_by_username(self, username):
         """
+
+        Gets the user id by user name
+
         .. code-block:: python
 
             my_ndex.get_user_by_username("ENTER YOUR USER")
 
-        Gets the user id by user name
 
         :param username: User name
         :type username: string
@@ -1161,12 +1162,13 @@ class Ndex2(object):
     def get_network_ids_for_user(self, username):
         """
 
+        Get the network uuids owned by the user
+
         .. code-block:: python
 
            list_uuid = my_ndex.get_network_ids_for_user("ENTER YOUR USER")
            print (list_uuid)
 
-        Get the network uuids owned by the user
 
         :param username: users NDEx username
         :type username: str
@@ -1210,6 +1212,9 @@ class Ndex2(object):
 
     def update_status(self):
         """
+
+        Updates the admin status
+
         .. code-block:: python
 
             try:
@@ -1224,9 +1229,6 @@ class Ndex2(object):
                 print("Could not access account %s with password %s" % (my_account, my_password))
                 print(inst.args)
 
-
-        Updates the admin status
-
         :return: None (however the status is stored in the client object self.status)
         :rtype:
         """
@@ -1236,6 +1238,12 @@ class Ndex2(object):
     def create_networkset(self, name, description):
         """
         Creates a new network set
+
+	.. code-block:: python
+
+		name = 'Insert Name Here'
+		description = 'Insert Description Here'
+		my_ndex.create_networkset(name, description)
 
         :param name: Network set name
         :type name: string
@@ -1263,6 +1271,13 @@ class Ndex2(object):
     def add_networks_to_networkset(self, set_id, networks):
         """
         Add networks to a network set.  User must have visibility of all networks being added
+	
+	.. code-block:: python
+
+		set_id = 'Insert SET ID HERE'
+		networks = 'Insert network UUID here'
+		my_ndex.add_networks_to_networkset(set_id, networks)
+		print(set_id	
 
         :param set_id: network set id
         :type set_id: basestring
@@ -1280,6 +1295,12 @@ class Ndex2(object):
     def delete_networks_from_networkset(self, set_id, networks, retry=5):
         """
         Removes network(s) from a network set.
+
+	.. code-blocks::
+
+		set_id = 'Insert set id here'
+		networks = 'Insert network UUID here'
+		my_ndex.delete_networks_from_networkset(set_id, networks)
 
         :param set_id: network set id
         :type set_id: basestring
